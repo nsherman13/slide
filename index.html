@@ -1,1 +1,161 @@
-default
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Project: Top Scoring Soccer Teams in England</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Data Project: Top Scoring Soccer Teams in England">
+  <meta name="author" content="Nitzan">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/slides" 
+    src="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Data Project: Top Scoring Soccer Teams in England</h1>
+    <h2></h2>
+    <p>Nitzan<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Project Description</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The purpose of my project is to visualize top scoring teams in England based on the following user inputs:</p>
+
+<ol>
+<li>Season(Year Start Date)</li>
+<li>League Tier</li>
+<li>Number of Teams to Display.</li>
+</ol>
+
+<p>This is a good tool for people wanting to know who was the most entertaining team for a given season or those who are fans of trivia!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Summary of Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>My analysis is based on data provided by the package engsoccerdata.</p>
+
+<p>Here is a short summary of the data. It includes information such as home team, away team, goals scored by each and result. This data does not include specific player information,however.</p>
+
+<pre><code>##         Date Season            home          visitor  FT hgoal vgoal
+## 1 1888-12-15   1888 Accrington F.C.      Aston Villa 1-1     1     1
+## 2 1889-01-19   1888 Accrington F.C. Blackburn Rovers 0-2     0     2
+## 3 1889-03-23   1888 Accrington F.C. Bolton Wanderers 2-3     2     3
+##   division tier totgoal goaldif result
+## 1        1    1       2       0      D
+## 2        1    1       2      -2      A
+## 3        1    1       5      -1      A
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Sample Graph</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Here is a sample output from the shiny app. I have hardcoded user inputs.</p>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Future Improvements/Next Steps</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>There are a few improvements that I&#39;d like to do.</p>
+
+<ol>
+<li>Apply ML and compare home winning percentage to league standings.</li>
+<li>Add flexibility to include analysis from different leagues.</li>
+<li>Create dashboards that show trending of specific teams.</li>
+</ol>
+
+<p>This analysis could be useful in helping see trends of particular soccer teams over time in respect to their playing style and other details.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Project Description'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Summary of Data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Sample Graph'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Future Improvements/Next Steps'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
